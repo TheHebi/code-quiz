@@ -17,8 +17,12 @@ let question = document.getElementById("question");
 let answers = document.getElementById("choices");
 let desc = document.getElementById("desc");
 let h1 = document.querySelector("h1");
+let questionBox = document.getElementById("question-box")
 // penalty for incorrect answer
 let penalty = 5;
+let questionIndex = 0;
+// create element
+let ulCreate = document.createElement("ul");
 // questions array
 let questionsArray = [
     {
@@ -33,7 +37,7 @@ let questionsArray = [
     },
     {
         question: `How do you write "Hello There" in an alert box`,
-        answer1: [`msg(Hello There);`, `alertBox("Hello There)`, `confirm("Hello Ther")`, `alert("Hello There");`],
+        choices: [`msg(Hello There);`, `alertBox("Hello There)`, `confirm("Hello Ther")`, `alert("Hello There");`],
         answer: `alert("Hello There");`
     },
     {
@@ -65,6 +69,27 @@ function startTimer(){
 }
 
 // questions and choices rendered to page
+function generate(){
+    // clearing the text content for the h1 and description during quiz event 
+    // used var instead of let in for statement to let the var be read later
+    h1.textContent = "";
+    desc.textContent = "";
+    for(let i = 0; i<questionsArray.length; i++){
+        var userQuestion = questionsArray[questionIndex].question;
+        var userChoices = questionsArray[questionIndex].choices;
+        question.textContent = userQuestion;
+    }
+    // appending choices
+    userChoices.forEach(function (newItem) {
+        let listItem = document.createElement("li");
+        listItem.textContent = newItem;
+        questionBox.appendChild(ulCreate);
+        ulCreate.appendChild(listItem)
+        listItem.addEventListener("click", compare)
+    })
+}
+
 
 // start button to start timer and quiz
 start.addEventListener("click", startTimer)
+start.addEventListener("click", generate)
