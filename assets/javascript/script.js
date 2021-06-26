@@ -9,46 +9,42 @@
 // when reset button on highscores page is clicked delete scores data from local storage
 
 // global vars
-let timeLeft = document.getElementById("timer")
-let score;
-let start = document.getElementById("start-quiz")
-
+let timeLeft = document.getElementById("timer");
+// score starts at zero, gets added to timeLeft later on
+let score = 0;
+let start = document.getElementById("start-quiz");
+let question = document.getElementById("question");
+let answers = document.getElementById("choices");
+let desc = document.getElementById("desc");
+let h1 = document.querySelector("h1");
+// penalty for incorrect answer
+let penalty = 5;
 // questions array
 let questionsArray = [
     {
         question: "Which is NOT a commonly used data type?",
-        answer1: "Strings",
-        answer2: "Boolean",
-        answer3: "Numbers",
-        correctAnswer: "Alerts"
+        choices: ["Strings", "Boolean", "Numbers", "Alerts"],
+        answer: "Alerts"
     },
     {
         question: "How do you link a JavaScript file to your HTML?",
-        answer1: "<js>",
-        answer2: "<link>",
-        answer3: "<scripting>",
-        correctAnswer: "<script>"
+        choices: ["<js>", "<link>", "<scripting>", "<script>"],
+        answer: "<script>"
     },
     {
         question: `How do you write "Hello There" in an alert box`,
-        answer1: "msg(Hello There);",
-        answer2: `alertBox("Hello There)`,
-        answer3: `confirm("Hello Ther")`,
-        correctAnswer: `alert("Hello There");`
+        answer1: [`msg(Hello There);`, `alertBox("Hello There)`, `confirm("Hello Ther")`, `alert("Hello There");`],
+        answer: `alert("Hello There");`
     },
     {
         question: "How do you start an if statement for if 1 is strictly equal to 5",
-        answer1: "if(i!=5)",
-        answer2: "if(i<5)",
-        answer3: "if(i--5)",
-        correctAnswer: "if(i===5)"
+        choices: ["if(i!=5)", "if(i<5)", "if(i--5)", "if(1===f)"],
+        answer: "if(i===5)"
     },
     {
         question: "What is the correct way to write an array?",
-        answer1: `let array = "red", "green", "blue`,
-        answer2: `let array = ("red", "green", "blue")`,
-        answer3: `let array = [red], [green], [blue]`,
-        correctAnswer: `let array = ["red", "green", "blue"]`
+        choices: [`let array = "red", "green", "blue`, `let array = ("red", "green", "blue")`, `let array = [red], [green], [blue]`, `let array = ["red", "green", "blue"]`],
+        answer: `let array = ["red", "green", "blue"]`
     },
 ]
 console.log(questionsArray)
@@ -67,6 +63,8 @@ function startTimer(){
         }
     }, 1000);
 }
+
+// questions and choices rendered to page
 
 // start button to start timer and quiz
 start.addEventListener("click", startTimer)
