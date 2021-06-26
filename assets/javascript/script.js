@@ -8,6 +8,11 @@
 // highscores page shows top 5 scores
 // when reset button on highscores page is clicked delete scores data from local storage
 
+// global vars
+let timeLeft = document.getElementById("timer")
+let score;
+let start = document.getElementById("start-quiz")
+
 // questions array
 let questionsArray = [
     {
@@ -47,3 +52,21 @@ let questionsArray = [
     },
 ]
 console.log(questionsArray)
+
+// timer function
+function startTimer(){
+    let timer = 60
+    let timeInterval = setInterval(function(){
+        if(timer>0){
+            timer--;
+            timeLeft.textContent = timer
+        }else{
+            timeLeft.textContent = "Times up"
+            clearInterval(timeInterval)
+            score = timer
+        }
+    }, 1000);
+}
+
+// start button to start timer and quiz
+start.addEventListener("click", startTimer)
