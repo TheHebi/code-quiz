@@ -1,4 +1,78 @@
+*{
+    font-family: 'Mukta', sans-serif;
+}
+
 body{
     background-color: #fffdd0;
-    ;
+    text-align: center;
+}
+
+header{
+    margin: 15px;
+}
+
+h1, #descr{
+    width: 50%;
+    display: block;
+    position: relative;
+    left: 25%;
+    right: 25%;
+
+}
+
+#highscore{
+    float: left;
+    position: absolute;
+    margin-top: 10px;
+    right: 40%;
+    left: 5px;
+    font-size: 25px;
+}
+#start-quiz{
+    position: relative;
+    font-size: 25px;
+    width: 150px;
+}
+main{
+    position: relative;
+    height: auto;
+    padding: 5px;
+    margin: auto;
+    text-align: left;
+    margin-left: 20%;
+    margin-right: 20%;
+    border: 2px solid black;
+}
+#timer{
+    width: fit-content;
+    height: fit-content;
+    float: right;
+    display: block;
+    margin-right: 3px;
+}
+
+#question, #choices{
+    width: fit-content;
+    margin-top: 28px;
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color: rgb(158, 157, 157);
+    color: white;
+    list-style-type: none;
+    padding: 0;
+    border: 2px solid black;
+}
+
+li{
+    padding: 5px;
+    margin: 3px;
+    border: 2px solid black;
+}
+
+@media screen and(max-width: 992px) {
+  
+}
+
+@media screen and(max-width: 768px) {
+   
 }

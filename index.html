@@ -1,13 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mukta&display=swap"
+      rel="stylesheet"
+    />
     <title>Code Quiz</title>
-</head>
-<body>
+  </head>
+  <body>
+    <header>
+      <!-- highscore button, links to highscore page -->
+      <button id="highscore">High Scores</button>
+      <h1>Coding Quiz</h1>
+      <p id="descr">
+        Answer the questions correctly to move on to the next question.
+        Incorrect answers will deduct 5 seconds from the timer. The quiz ends
+        when you either answer all questions correctly, or run out of time. Good
+        luck.
+      </p>
+      <!-- start quiz button -->
+      <button id="start-quiz">Start</button>
+    </header>
+    <main>
+      <!-- timer for quiz -->
+      <div id="timer">Timer</div>
+      <!-- quiz box -->
+      <section id="quiz">
+        <div id="quesion-box">
+          <!-- box for question -->
+          <p id="question">
+            A very useful tool for used during development and debugging for
+            printing content to the debugger is:
+          </p>
+          <!-- ul for answers -->
+          <ul id="choices">
+            <li>Javascript</li>
+            <li>Javascript</li>
+            <li>Javascript</li>
+            <li>Javascript</li>
+          </ul>
+        </div>
+      </section>
+    </main>
     <script src="./assets/javascript/script.js"></script>
-</body>
+  </body>
 </html>
