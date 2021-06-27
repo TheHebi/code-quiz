@@ -44,15 +44,36 @@ var score = 0;
 var questionIndex = 0;
 var currentTime = document.querySelector("#currentTime");
 var timer = document.querySelector("#startTime");
-var questionsDiv = document.querySelector("#quizQuestions");
+var quizQuestions = document.querySelector("#quizQuestions");
 var wrapper = document.querySelector("#wrapper");
 
 // 15 seconds per question:
 var secondsLeft = 76;
 // interval time
 var holdInterval = 0;
-// time lost for answering question wrong
+// time lost for answering question incorrect
 var penalty = 10;
 // Creates new element
 var ulCreate = document.createElement("ul");
 
+// renders questions and choices to the page
+function generate(questionIndex){
+    quizQuestions.textContent = "";
+    ulCreate.textContent = "";
+    for(var i = 0; i < questions.length; i++){
+        // appends the question
+        var userQuestion = questions[questionIndex].question;
+        var userChoices = questions[questionIndex].choices;
+        quizQuestions.textContent = userQuestion;
+    }
+    // appends choices
+    userChoices.forEach(function(newItem){
+        var listItem = document.createElement("li");
+        listItem.textContent = newItem;
+        quizQuestions.appendChild(ulCreate);
+        ulCreate.appendChild(listItem);
+        // runs compare function
+        // listItem.addEventListener("click", (compare));
+    })
+}
+console.log(generate)
