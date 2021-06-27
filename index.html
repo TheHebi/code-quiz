@@ -5,39 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./assets/css/style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Mukta&display=swap"
-      rel="stylesheet"
-    />
+
     <title>Code Quiz</title>
   </head>
   <body>
-    <header>
-      <!-- highscore button, links to highscore page -->
-      <a href="./highscores.html">High Scores</a>
-      <h1>Coding Quiz</h1>
-      <p id="desc">
-        Answer the questions correctly to move on to the next question.
-        Incorrect answers will deduct 5 seconds from the timer. The quiz ends
-        when you either answer all questions correctly, or run out of time. Good
-        luck.
-      </p>
-      <!-- start quiz button -->
-      <button id="start-quiz">Start</button>
-    </header>
-    <main>
-      <!-- timer for quiz -->
-      <div id="timer"></div>
-      <!-- quiz box -->
-      <section id="quiz">
-        <div id="question-box">
-          <!-- box for question -->
-          <p id="question"></p>
-          <!-- ul for answers -->
-          <!-- <ul id="choices"></ul> -->
-        </div>
+    <!-- Link to highscores -->
+    <a href="HighScores.html">View Highscores</a>
+    <!-- wrapper for centering elements-->
+    <main id="wrapper">
+      <!-- timer -->
+      <div id="currentTime"></div>
+      <!-- quiz questions -->
+      <section id="quizQuestions">
+        <h1>Coding Quiz Challenge</h1>
+        <p>Answer the foloowing coding related questions. Incorrect answers will deduct 10 seconds from the timer.</p>
+        <ul id="choicesUl"></ul>
+        <!-- Buttons -->
+        <button id="startTime">Start Quiz</button>
       </section>
     </main>
     <script src="./assets/javascript/script.js"></script>
