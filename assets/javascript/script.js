@@ -39,3 +39,20 @@ var questions = [
 ]
 console.log(questions)
 
+// global vars
+var score = 0;
+var questionIndex = 0;
+var currentTime = document.querySelector("#currentTime");
+var timer = document.querySelector("#startTime");
+var questionsDiv = document.querySelector("#quizQuestions");
+var wrapper = document.querySelector("#wrapper");
+
+// 15 seconds per question:
+var secondsLeft = 76;
+// interval time
+var holdInterval = 0;
+// time lost for answering question wrong
+var penalty = 10;
+// Creates new element
+var ulCreate = document.createElement("ul");
+
