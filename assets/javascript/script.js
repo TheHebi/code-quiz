@@ -9,22 +9,24 @@
 // when reset button on highscores page is clicked delete scores data from local storage
 
 // global vars
-let timeLeft = document.getElementById("timer");
+var timeLeft = document.getElementById("timer");
 // score starts at zero, gets added to timeLeft later on
-let score = 0;
-let start = document.getElementById("start-quiz");
-let question = document.getElementById("question");
-let answers = document.getElementById("choices");
-let desc = document.getElementById("desc");
-let h1 = document.querySelector("h1");
-let questionBox = document.getElementById("question-box")
+var score = 0;
+var start = document.getElementById("start-quiz");
+var question = document.getElementById("question");
+var answers = document.getElementById("choices");
+var desc = document.getElementById("desc");
+var h1 = document.querySelector("h1");
+var questionBox = document.getElementById("question-box")
+// timer
+var timer = 61;
 // penalty for incorrect answer
-let penalty = 5;
-let questionIndex = 0;
+var penalty = 5;
+var questionIndex = 0;
 // create element
-let ulCreate = document.createElement("ul");
+var ulCreate = document.createElement("ul");
 // questions array
-let questionsArray = [
+var questionsArray = [
     {
         question: "Which is NOT a commonly used data type?",
         choices: ["Strings", "Boolean", "Numbers", "Alerts"],
@@ -47,16 +49,16 @@ let questionsArray = [
     },
     {
         question: "What is the correct way to write an array?",
-        choices: [`let array = "red", "green", "blue`, `let array = ("red", "green", "blue")`, `let array = [red], [green], [blue]`, `let array = ["red", "green", "blue"]`],
-        answer: `let array = ["red", "green", "blue"]`
+        choices: [`var array = "red", "green", "blue`, `var array = ("red", "green", "blue")`, `var array = [red], [green], [blue]`, `var array = ["red", "green", "blue"]`],
+        answer: `var array = ["red", "green", "blue"]`
     },
 ]
 console.log(questionsArray)
 
 // timer function
 function startTimer(){
-    let timer = 60
-    let timeInterval = setInterval(function(){
+
+    var timeInterval = setInterval(function(){
         if(timer>0){
             timer--;
             timeLeft.textContent = timer
@@ -71,17 +73,18 @@ function startTimer(){
 // questions and choices rendered to page
 function generate(){
     // clearing the text content for the h1 and description during quiz event 
-    // used var instead of let in for statement to let the var be read later
     h1.textContent = "";
     desc.textContent = "";
-    for(let i = 0; i<questionsArray.length; i++){
+    ulCreate.textContent = "";
+    question.textContent = "";
+    for(var i = 0; i<questionsArray.length; i++){
         var userQuestion = questionsArray[questionIndex].question;
         var userChoices = questionsArray[questionIndex].choices;
         question.textContent = userQuestion;
     }
     // appending choices
     userChoices.forEach(function (newItem) {
-        let listItem = document.createElement("li");
+        var listItem = document.createElement("li");
         listItem.textContent = newItem;
         questionBox.appendChild(ulCreate);
         ulCreate.appendChild(listItem)
@@ -89,7 +92,93 @@ function generate(){
     })
 }
 
+// compare choice to answer
+function compare(event){
+    var element = event.target
+    if(element.matches("li")){
+        var createDiv = document.createElement("div")
+        createDiv.setAttribute("id", "createDiv")
+        if(element.textContent = questionsArray[questionIndex].answer){
+            questionIndex++;
+            createDiv.textContent = "Correct";
+        }else{
+            timeLeft - penalty
+            createDiv.textContent = "Incorrect";
+        }
+    }
+    if(questionIndex >= questionsArray.length){
+        finished();
+        createDiv.textContent = `Quiz finished! You got ${score}/${questionsArray.length} correct!`
+    }else{
+        generate(questionIndex);
+    }
+    questionBox.appendChild(createDiv);
+}
 
+//will append last page
+function finished() {
+    ulCreate.textContent = "";
+    question.textContent = "";
+    // heading
+    var createH1 = document.createElement("h1");
+    createH1.setAttribute("id", "createH1");
+    createH1.textContent = "Quiz Finished!"
+    questionBox.appendChild(createH1);
+    // paragraph
+    var createP = document.createElement("p")
+    createP.setAttribute("id", "createP")
+    questionBox.appendChild(createP);
+    if(timeLeft >= 0){
+        var timeRemaining = timeLeft;
+        var createP2 = document.createElement("p");
+        clearInterval()
+        createP2.textContent = `Your final score is ${timeRemaining}`
+        questionBox.appendChild(createP2)
+    }
+    // initial
+    var createLabel = document.createElement("label");
+    createLabel.setAttribute("id", "createLabel");
+    createLabel.textContent = "Enter your initials";
+    questionBox.appendChild(createLabel);
+
+    // input for intiails
+    var createInput = document.createElement("input");
+    createInput.setAttribute("type", "text");
+    createInput.setAttribute("id", "initials");
+    createInput.textContent = "";
+    questionBox.appendChild(createInput);
+
+    // submit button
+    var createSubmit = document.createElement("button");
+    createSubmit.setAttribute("type", "submit");
+    createSubmit.setAttribute("id", "submit");
+    createSubmit.textContent = "Submit";
+    questionBox.appendChild(createSubmit);
+
+    // event listener for submit button, saves intials and score to local storage
+    createSubmit.addEventListener("click", function(){
+        var initials = createInput.value;
+        if(initials === null){
+            console.log("NO INITIALS INPUT")
+        }else{
+            var finalScore = {
+                initials: initials,
+                score: timeLeft
+            }
+            console.log(finalScore);
+            var allScores = localStorage.getItem("allScore")
+            if (allScores === null){
+                allScores = [];
+            }else{
+                allScores = JSON.parse(allScores);
+            }
+            allScores.push(finalScore);
+            var newScore = JSON.stringify(allScores);
+            localStorage.setItem("allScores", newScore);
+            window.location.replace("./highscores.html")
+        }
+    });
+}
 // start button to start timer and quiz
 start.addEventListener("click", startTimer)
 start.addEventListener("click", generate)
