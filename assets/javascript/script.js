@@ -28,7 +28,7 @@ var questions = [
     },
     {
         question: "How do you start an if statement for if 1 is strictly equal to 5",
-        choices: ["if(1===5)", "if(i!=5)", "if(i<5)", "if(i--5)"],
+        choices: ["if(i===5)", "if(i!=5)", "if(i<5)", "if(i==5)"],
         answer: "if(i===5)"
     },
     {
@@ -72,8 +72,126 @@ function generate(questionIndex){
         listItem.textContent = newItem;
         quizQuestions.appendChild(ulCreate);
         ulCreate.appendChild(listItem);
-        // runs compare function
-        // listItem.addEventListener("click", (compare));
+        // TODO: runs compare function when answer is clicked on
+        listItem.addEventListener("click", (compare));
     })
 }
-console.log(generate)
+
+// compares choice to answer
+function compare(event){
+    var element = event.target;
+    if(element.matches("li")){
+        // creating div for response to answer
+        var createDiv = document.createElement("div");
+        createDiv.setAttribute("id", "createDove")
+        // if correct
+        if(element.textContent == questions[questionIndex].answer){
+            score++;
+            createDiv.textContent = "Correct"
+        //if incorrect 
+        }else{
+            // penalty kicks in. 10 seconds lost
+            secondsLeft = secondsLeft - penalty;
+            createDiv.textContent = `Incorrect, the answer is ${questions[questionIndex].answer}`;
+        }
+    }
+    // advance question index to generate next question
+    questionIndex++;
+    // TODO: if last question answered will apend last page with user stats
+    if(questionIndex >= questions.length){
+        finished();
+        createDiv.textContent = `Quiz finished, you got ${score} / ${questions.length} correct.`;
+    }else{
+        generate(questionIndex);
+    }
+    quizQuestions.appendChild(createDiv);
+}
+
+// appends last page
+// TODO: uncomment link to highscores page when finished
+function finished(){
+    quizQuestions.textContent = "";
+    timer.textContent = "";
+
+    // quiz finished heading
+    var createH1 = document.createElement("h1");
+    createH1.setAttribute("id", "createH1");
+    createH1.textContent = "Quiz Finished";
+    quizQuestions.appendChild(createH1);
+
+    // appends p tag
+    var createP = document.createElement('P');
+    createP.setAttribute("id", "createP");
+    quizQuestions.appendChild(createP);
+
+    // converts time left into score for scoreboard
+    if(secondsLeft >= 0){
+        var timeRemaining = secondsLeft;
+        var createP2 = document.createElement("p");
+        clearInterval(holdInterval);
+        createP.textContent = `Your final score is ${timeRemaining}`;
+        quizQuestions.appendChild(createP2);
+    }
+
+    // append label for input
+    var createLabel = document.createElement("label");
+    createLabel.setAttribute("id", "createLabel");
+    createLabel.textContent = "Enter your initials";
+    quizQuestions.appendChild(createLabel);
+
+    // input field for initials
+    var createInput = document.createElement("input");
+    createInput.setAttribute("type", "text");
+    createInput.setAttribute("id", "createInput");
+    createInput.textContent = "";
+    quizQuestions.appendChild(createInput);
+
+    // submit button for input
+    var createSubmit = document.createElement("button");
+    createSubmit.setAttribute("type", "submit");
+    createSubmit.setAttribute("id", "createSubmit");
+    createSubmit.textContent = "Submit";
+    quizQuestions.appendChild(createSubmit);
+
+    // clicking on submit will send initials and score to local storage
+    createSubmit.addEventListener("click", function(){
+        var initials = createInput.value;
+        if(initials === null){
+            console.log("no initials submitted")
+        }else{
+            var finalScore = {
+                initials: initials,
+                score: timeRemaining
+            }
+            console.log(finalScore);
+            var allScores = localStorage.getItem("allScores");
+            if (allScores === null){
+                allScores = [];
+            }else{
+                allScores = JSON.parse(allScores);
+            }
+            allScores.push(finalScore);
+            var newScore = JSON.stringify(allScores);
+            localStorage.setItem("allScores", newScore);
+            // TODO: change page to highscores.html
+            // window.location.replace("./highscores.html");
+        }
+    });
+}
+
+// starts timer and quiz when button is clicked
+timer.addEventListener("click", function(){
+    // checking against zero because thats the initial variable time, prevents future clicks during quiz
+    if(holdInterval === 0){
+        holdInterval = setInterval(function(){
+            secondsLeft--;
+            currentTime.textContent = `Time left: ${secondsLeft}`
+            if(secondsLeft <= 0){
+                clearInterval(holdInterval);
+                finished();
+                currentTime.textContent = "Times up."
+            }
+        },1000)
+    }
+    generate(questionIndex)
+});
