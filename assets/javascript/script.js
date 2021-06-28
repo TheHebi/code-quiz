@@ -1,6 +1,6 @@
 // 5 questions with 4 answers each, all inside one array. 
 // start button will start timer and populate the #questions <p>, and the #choices <ul> with the answer choices as <li>
-// wrong answer removes 5s from timer
+// wrong answer removes 10s from timer
 // if timer reaches 0 quiz is over
 // if all questions answered correctly quiz is over
 // score is equal to time left when quiz is over
@@ -174,14 +174,14 @@ function finished(){
             var newScore = JSON.stringify(allScores);
             localStorage.setItem("allScores", newScore);
             // TODO: change page to highscores.html
-            // window.location.replace("./highscores.html");
+            window.location.replace("./highscores.html");
         }
     });
 }
 
 // starts timer and quiz when button is clicked
 timer.addEventListener("click", function(){
-    // checking against zero because thats the initial variable time, prevents future clicks during quiz
+    // checking against zero because thats the initial interval time, prevents future clicks during quiz
     if(holdInterval === 0){
         holdInterval = setInterval(function(){
             secondsLeft--;

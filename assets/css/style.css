@@ -1,6 +1,10 @@
 body {
   background-color: #fffdd0;
 }
+#highscores{
+  border-radius: 10px;
+}
+
 #wrapper {
   position: absolute;
   display: block;
@@ -22,7 +26,7 @@ a {
 #startTime {
   background-color: gray;
   margin-left: 33%;
-  padding: 15px 32px;
+  padding: 15px 30px;
   font-size: 20px;
   color: white;
 }
@@ -59,7 +63,7 @@ a {
 }
 
 button {
-  border-radius: 8px;
+  border-radius: 10px;
 }
 
 textarea {
@@ -100,40 +104,4 @@ li {
 #createDiv {
   margin-top: 20px;
   border-top: 1px solid black;
-}
-
-/* media query for 992px */
-@media screen and (max-width: 992px) {
-  /* Resized content to fit 992 */
-  body {
-    max-width: 992;
-  }
-  /* Resized main-content to fit 992 */
-  #wrapper {
-    position: absolute;
-    left: 20%;
-  }
-
-  #goBack {
-    position: relative;
-    left: 55%;
-  }
-
-  #clear {
-    position: relative;
-    right: 5%;
-  }
-}
-
-/* media query for 768px */
-@media screen and (max-width: 768) {
-  /* Resized content to fit 768 */
-  body {
-    min-width: 768;
-  }
-  /* Resized main-content to fit 768*/
-  #wrapper {
-    position: absolute;
-    left: 10%;
-  }
 }
