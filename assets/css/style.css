@@ -44,11 +44,10 @@ a {
   padding: 10px;
   font-size: 20px;
   color: white;
-  top: 30%;
-  left: 55%;
+  left: .45;
   width: auto;
   text-align: center;
-  text-decoration: none;
+  margin: 10px;
 }
 
 #clear {
@@ -57,9 +56,9 @@ a {
   padding: 10px;
   font-size: 20px;
   color: white;
-  top: 30%;
-  right: 5%;
+  right: .05;
   text-align: center;
+  margin: 10px;
 }
 
 button {
