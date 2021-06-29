@@ -83,7 +83,7 @@ function compare(event){
     if(element.matches("li")){
         // creating div for response to answer
         var createDiv = document.createElement("div");
-        createDiv.setAttribute("id", "createDove")
+        createDiv.setAttribute("id", "createDiv")
         // if correct
         if(element.textContent == questions[questionIndex].answer){
             score++;
