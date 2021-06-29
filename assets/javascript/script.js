@@ -5,7 +5,7 @@
 // if all questions answered correctly quiz is over
 // score is equal to time left when quiz is over
 // when quiz is over present user with input for initials, save initials and score to local storage
-// highscores page shows top 5 scores
+// highscores page shows top scores
 // when reset button on highscores page is clicked delete scores data from local storage
 
 
@@ -48,12 +48,12 @@ var quizQuestions = document.querySelector("#quizQuestions");
 var wrapper = document.querySelector("#wrapper");
 
 // 15 seconds per question:
-var secondsLeft = 76;
+var secondsLeft = 75;
 // interval time
 var holdInterval = 0;
 // time lost for answering question incorrect
 var penalty = 10;
-// Creates new element
+// Creates new element (ul)
 var ulCreate = document.createElement("ul");
 
 // renders questions and choices to the page
@@ -61,7 +61,7 @@ function generate(questionIndex){
     quizQuestions.textContent = "";
     ulCreate.textContent = "";
     for(var i = 0; i < questions.length; i++){
-        // appends the question
+        // grabs the question based on index value
         var userQuestion = questions[questionIndex].question;
         var userChoices = questions[questionIndex].choices;
         quizQuestions.textContent = userQuestion;
@@ -72,7 +72,7 @@ function generate(questionIndex){
         listItem.textContent = newItem;
         quizQuestions.appendChild(ulCreate);
         ulCreate.appendChild(listItem);
-        // TODO: runs compare function when answer is clicked on
+        // runs compare function when answer is clicked on
         listItem.addEventListener("click", (compare));
     })
 }
@@ -97,7 +97,7 @@ function compare(event){
     }
     // advance question index to generate next question
     questionIndex++;
-    // TODO: if last question answered will apend last page with user stats
+    // if last question answered will apend last page with user stats
     if(questionIndex >= questions.length){
         finished();
         createDiv.textContent = `Quiz finished, you got ${score} / ${questions.length} correct.`;
@@ -107,8 +107,7 @@ function compare(event){
     quizQuestions.appendChild(createDiv);
 }
 
-// appends last page
-// TODO: uncomment link to highscores page when finished
+// adds p tag with core info and appends submit form
 function finished(){
     quizQuestions.textContent = "";
     timer.textContent = "";
@@ -173,7 +172,7 @@ function finished(){
             allScores.push(finalScore);
             var newScore = JSON.stringify(allScores);
             localStorage.setItem("allScores", newScore);
-            // TODO: change page to highscores.html
+            // change page to highscores.html
             window.location.replace("./highscores.html");
         }
     });

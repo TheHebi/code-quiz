@@ -11,7 +11,7 @@ clear.addEventListener("click", function () {
 // pulls local storage for highscores list
 var allScores = localStorage.getItem("allScores");
 allScores = JSON.parse(allScores);
-// if scores arent empty
+// if scores arent empty, pulls score info from local storage and appends them
 if (allScores !== null) {
     
     for (var i = 0; i < allScores.length; i++) {
